@@ -20,7 +20,10 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": [
+      "cobe"
+    ]
   },
   "include": [
     "next-env.d.ts",
