@@ -2,7 +2,6 @@
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.scss";
 import GotoTop from "@/components/molecule/go-to-top";
 import { Toaster } from "@/components/ui/toaster";
@@ -10,6 +9,18 @@ import WhatsApp from "@/components/molecule/whatsapp";
 import CookiePolicyNotificationBar from "@/components/molecule/cookie-policy";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import PageView from "@/lib/datalayer/page-view";
+import { Poppins, Lato } from "next/font/google";
+import Script from "next/script";
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const lato = Lato({
+  subsets: ["latin"],
+  variable: "--font-lato",
+  weight: ["100", "300", "400", "700", "900"],
+});
 
 // Declare the dataLayer object as a global variable
 declare global {
@@ -17,8 +28,6 @@ declare global {
     dataLayer: any[];
   }
 }
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Sociomatic | Digital Solutions for Growth",
@@ -56,7 +65,11 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={inter.className}>
+      <body className={`${poppins.className} ${lato.variable}`}>
+        {/* <Script
+          type="text/javascript"
+          src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=X5AtQr"
+        /> */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WP6VXKV"
@@ -66,9 +79,9 @@ export default function RootLayout({
           ></iframe>
         </noscript>
         <PageView />
-        {/* <div className="py-2 text-center bg-pink-700 text-white animate-pulse">
+        <div className="py-2 text-center bg-pink-700 text-white animate-pulse">
           This site is under maintenance
-        </div> */}
+        </div>
         <Navbar />
         <main className="overflow-hidden">{children}</main>
         <SpeedInsights />

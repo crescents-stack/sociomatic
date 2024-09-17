@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,13 +14,16 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { GoogleAnalyticsFunnelForm, TGoogleAnalyticsFunnelForm } from "./types";
-import CustomSelect from "./custom-select";
+
 import CustomInput from "./custom-input";
 import CustomRadio from "./custom-radio";
 import { FunnelFormAction } from "./actions";
 import CountryCombobox from "@/components/ui/country-combobox";
 import { Sun } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { DL___FormData } from "./datalayer";
+import { useEffect } from "react";
+import Checkboxes from "@/components/molecule/checkboxes";
 
 function GoogleAnalyticsForm() {
   const router = useRouter();
@@ -28,34 +32,42 @@ function GoogleAnalyticsForm() {
   });
 
   async function onSubmit(data: TGoogleAnalyticsFunnelForm) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-
     if (typeof window !== "undefined") {
-      console.log("Running");
       const email = localStorage.getItem("user_email") || "dummy@mail.test";
       if (email) {
         const result = await FunnelFormAction({ ...data, email });
-        console.log(result);
         toast({
           variant: result?.success ? "default" : "destructive",
           title: "Joining to program",
           description: result?.message || "Thank you for your joining!",
         });
-        if (result.success) {
-          router.push("/joining/end?type=googleads");
+        if (typeof window !== "undefined") {
+          if (result.success) {
+            router.push("/joining/end?type=googleanalytics");
+            DL___FormData(
+              form.getValues(),
+              "joiningGoogleAnalyticsFormSubmission",
+              "joining_google_analytics_form_submission"
+            );
+          } else {
+            DL___FormData(
+              form.getValues(),
+              "joiningGoogleAnalyticsFormAbandoned",
+              "joining_google_analytics_form_abandoned"
+            );
+          }
         }
       }
     }
   }
 
-  console.log(form.formState.errors);
+  useEffect(() => {
+    DL___FormData(
+      form.getValues(),
+      "joiningGoogleAnalyticsFormProcessing",
+      "joining_google_analytics_form_processing"
+    );
+  }, [form.getValues()]);
 
   return (
     <Form {...form}>
@@ -68,6 +80,7 @@ function GoogleAnalyticsForm() {
           resolve
         </h4>
         <CustomInput form={form} name="name" label="Your name" />
+        <CustomInput form={form} name="websiteUrl" label="Website URL" />
         <FormField
           control={form.control}
           name="country"
@@ -76,7 +89,6 @@ function GoogleAnalyticsForm() {
               <FormLabel>Country</FormLabel>
               <CountryCombobox
                 onChange={(value: any) => {
-                  console.log(value);
                   form.setValue("country", value.target.value);
                 }}
               />
@@ -87,7 +99,7 @@ function GoogleAnalyticsForm() {
 
         <CustomInput form={form} name="phone" label="Phone" />
 
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="industryType"
           label="What is your industry?"
@@ -95,18 +107,22 @@ function GoogleAnalyticsForm() {
             {
               label: "Ecommerce",
               value: "Ecommerce",
+              checked: false,
             },
             {
               label: "Lead generation",
               value: "Lead generation",
+              checked: false,
             },
             {
               label: "Blog",
               value: "Blog",
+              checked: false,
             },
             {
               label: "SaaS",
               value: "SaaS",
+              checked: false,
             },
           ]}
         />
@@ -143,7 +159,7 @@ function GoogleAnalyticsForm() {
           type="textarea"
         />
 
-        {form.watch("goals") === "Others" ? (
+        {form.watch("goals")?.includes("Others") ? (
           <CustomInput form={form} name="customGoals" label="Add your own" />
         ) : null}
 
@@ -157,7 +173,7 @@ function GoogleAnalyticsForm() {
           ]}
         />
 
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="platformToSetup"
           label="Which platform do you need to set up tracking ?"
@@ -165,18 +181,22 @@ function GoogleAnalyticsForm() {
             {
               label: "Google Ads Converstion",
               value: "Google Ads Converstion",
+              checked: false,
             },
             {
               label: "Google Analytics",
               value: "Google Analytics",
+              checked: false,
             },
             {
               label: "TikTok Pixel",
               value: "TikTok Pixel",
+              checked: false,
             },
             {
               label: "Facebook Pixel",
               value: "Facebook Pixel",
+              checked: false,
             },
           ]}
         />

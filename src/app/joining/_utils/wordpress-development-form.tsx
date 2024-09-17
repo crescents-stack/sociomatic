@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,13 +14,16 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { WebDevelopmentFunnelForm, TWebDevelopmentFunnelForm } from "./types";
-import CustomSelect from "./custom-select";
+
 import CustomInput from "./custom-input";
 import CustomRadio from "./custom-radio";
 import { FunnelFormAction } from "./actions";
 import CountryCombobox from "@/components/ui/country-combobox";
 import { Sun } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { DL___FormData } from "./datalayer";
+import { useEffect } from "react";
+import Checkboxes from "@/components/molecule/checkboxes";
 
 function WordpressDevelopmentForm() {
   const router = useRouter();
@@ -28,34 +32,43 @@ function WordpressDevelopmentForm() {
   });
 
   async function onSubmit(data: TWebDevelopmentFunnelForm) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-
     if (typeof window !== "undefined") {
-      console.log("Running");
       const email = localStorage.getItem("user_email") || "dummy@mail.test";
       if (email) {
         const result = await FunnelFormAction({ ...data, email });
-        console.log(result);
+
         toast({
           variant: result?.success ? "default" : "destructive",
           title: "Joining to program",
           description: result?.message || "Thank you for your joining!",
         });
-        if (result.success) {
-          router.push("/joining/end?type=googleads");
+        if (typeof window !== "undefined") {
+          if (result.success) {
+            router.push("/joining/end?type=wordpress");
+            DL___FormData(
+              form.getValues(),
+              "joiningWordpressFormSubmission",
+              "joining_wordpress_form_submission"
+            );
+          } else {
+            DL___FormData(
+              form.getValues(),
+              "joiningWordpressFormAbandoned",
+              "joining_Wordpress_form_abandoned"
+            );
+          }
         }
       }
     }
   }
 
-  console.log(form.formState.errors);
+  useEffect(() => {
+    DL___FormData(
+      form.getValues(),
+      "joiningWordpressFormProcessing",
+      "joining_wordpress_form_processing"
+    );
+  }, [form.getValues()]);
 
   return (
     <Form {...form}>
@@ -76,7 +89,6 @@ function WordpressDevelopmentForm() {
               <FormLabel>Country</FormLabel>
               <CountryCombobox
                 onChange={(value: any) => {
-                  console.log(value);
                   form.setValue("country", value.target.value);
                 }}
               />
@@ -86,7 +98,7 @@ function WordpressDevelopmentForm() {
         />
 
         <CustomInput form={form} name="phone" label="Phone" />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="businessType"
           label="Which industry does your business thrive in?"
@@ -94,14 +106,16 @@ function WordpressDevelopmentForm() {
             {
               label: "Startup",
               value: "Startup",
+              checked: false,
             },
             {
               label: "Small Business Seeking Growth",
               value: "Small Business Seeking Growth",
-            }
+              checked: false,
+            },
           ]}
         />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="industryType"
           label="What is your industry?"
@@ -109,17 +123,19 @@ function WordpressDevelopmentForm() {
             {
               label: "ECommerce",
               value: "ECommerce",
+              checked: false,
             },
             {
               label: "Others",
               value: "Others",
+              checked: false,
             },
           ]}
         />
-        {form.watch("industryType") === "Others" ? (
+        {form.watch("industryType")?.includes("Others") ? (
           <CustomInput form={form} name="customIndustry" label="Add your own" />
         ) : null}
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="goals"
           label="Primary Objectives for Your WordPress Website"
@@ -127,23 +143,27 @@ function WordpressDevelopmentForm() {
             {
               label: "Improve SEO",
               value: "Improve SEO",
+              checked: false,
             },
             {
               label: "Enhance User Experience",
               value: "Enhance User Experience",
+              checked: false,
             },
             {
               label: "Integrate New Features",
               value: "Integrate New Features",
+              checked: false,
             },
             {
               label: "Others",
               value: "Others",
+              checked: false,
             },
           ]}
         />
 
-        {form.watch("goals") === "Others" ? (
+        {form.watch("goals")?.includes("Others") ? (
           <CustomInput
             form={form}
             name="customGoals"
@@ -192,7 +212,7 @@ function WordpressDevelopmentForm() {
           name="painpoints"
           label="What are your biggest challenges with attracting customers? (Any pain points)"
         />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="commitment"
           label="How ready can you fully engage with our intensive wordpress development program?"
@@ -200,14 +220,17 @@ function WordpressDevelopmentForm() {
             {
               label: "Highly Committed",
               value: "Highly Committed",
+              checked: false,
             },
             {
               label: "A Few Questions Before Proceeding",
               value: "A Few Questions Before Proceeding",
+              checked: false,
             },
             {
               label: "I am Not Ready to Commit Yet, but Possibly in the Future",
               value: "I am Not Ready to Commit Yet, but Possibly in the Future",
+              checked: false,
             },
           ]}
         />

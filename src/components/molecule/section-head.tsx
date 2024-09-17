@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import ANIM__FadeInOnScroll from "../anims/fadein.anim";
 
 const SectionHead = ({
   highlighter = "Our Services",
@@ -15,26 +16,28 @@ const SectionHead = ({
   paragraphs: any;
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center small-gap max-w-[566px] mx-auto text-center">
+    <ANIM__FadeInOnScroll className="flex flex-col items-center justify-center small-gap max-w-[566px] mx-auto text-center">
       {highlighter ? (
-        <p className="text-[16px] md:text-[20px] text-secondary font-semibold">
+        <p className="text-[12px] md:text-[16px] text-secondary font-semibold inline-block px-4 py-[4px] rounded-full border border-primary/20">
           {highlighter}
         </p>
       ) : null}
-      {H2 ? <h2 className="text-primary [&>span]:text-secondary">{H2}</h2> : null}
+      {H2 ? (
+        <h2 className="text-primary [&>span]:text-secondary">{H2}</h2>
+      ) : null}
       {paragraphs.length
         ? paragraphs.map((item: any, index: number) => {
             return (
               <p
                 key={index}
-                className="[&>span]:font-medium [&>span]:text-primary"
+                className="[&>span]:font-medium [&>span]:text-primary text-primary/80"
               >
                 {item}
               </p>
             );
           })
         : null}
-    </div>
+    </ANIM__FadeInOnScroll>
   );
 };
 

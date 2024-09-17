@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -13,11 +14,66 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { useRouter } from "next/navigation";
 import { GetOtp, VerifyOtp } from "@/app/joining/_utils/actions";
 import { Sun } from "lucide-react";
+import ShimmerButton from "../magicui/shimmer-button";
+
+const winDow = typeof window !== "undefined";
+
+// Function to track email modal form submissions
+function trackEmailModalFormSubmission(formData: any) {
+  if (typeof window !== "undefined") {
+    window[`dataLayer`] = window?.dataLayer || [];
+
+    window.dataLayer.push({
+      event: "funnelEmailSubmission",
+      formName: "funnelEmailSubmit",
+      formData,
+    });
+  }
+}
+
+// Function to track otp verification modal form submissions
+function emailVerified(formData: any) {
+  if (typeof window !== "undefined") {
+    window[`dataLayer`] = window?.dataLayer || [];
+
+    window.dataLayer.push({
+      event: "emailVerified",
+      formName: "emailVerified",
+      formData,
+    });
+  }
+}
+
+// Function to track email modal form submissions which is abandoned
+function emailModalFormProcessing(formData: any) {
+  if (typeof window !== "undefined") {
+    window[`dataLayer`] = window?.dataLayer || [];
+
+    window.dataLayer.push({
+      event: "emailModalFormProcessing",
+      formName: "email_modal_form_processing",
+      formData,
+    });
+  }
+}
+
+// Function to track otp verification modal form submissions which is abandoned
+function otpVerificationAbandoned(formData: any) {
+  if (typeof window !== "undefined") {
+    window[`dataLayer`] = window?.dataLayer || [];
+
+    window.dataLayer.push({
+      event: "otpVerificationAbandoned",
+      formName: "otp_verification_abandoned",
+      formData,
+    });
+  }
+}
 
 const EmailModal = ({
   buttonText,
@@ -35,31 +91,39 @@ const EmailModal = ({
   const submitEmail = async () => {
     setPending(true);
     const result = await GetOtp(email);
-    console.log(result);
+
     if (result.success) {
       setStep(2);
     }
+    trackEmailModalFormSubmission({ email });
     setPending(false);
   };
 
   const verifyEmail = async () => {
     setPending(true);
     const result = await VerifyOtp(parseInt(otp), email);
-    console.log(result);
+
     setPending(false);
     if (result.success) {
-      if (typeof window !== "undefined") {
+      if (winDow) {
         localStorage.setItem("user_email", email);
+        emailVerified({ email, otp });
       }
       router.push(path);
+    } else {
+      winDow && otpVerificationAbandoned({ email, otp });
     }
   };
+
+  useEffect(() => {
+    if (step === 1) {
+      email.length > 0 && emailModalFormProcessing({ email });
+    }
+  }, [email]);
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <span className="bg-secondary text-white text-center h-[38px] rounded-lg border border-secondary hover:bg-secondary/80 flex items-center justify-center px-6 font-medium sm:cursor-pointer">
-          {buttonText}
-        </span>
+        <ShimmerButton>{buttonText}</ShimmerButton>
       </DialogTrigger>
       <DialogContent className="max-w-[300px] sm:max-w-[425px]">
         <Image
@@ -71,7 +135,7 @@ const EmailModal = ({
         <DialogHeader className="space-y-2 pt-[180px] md:pt-[240px] z-10">
           <DialogTitle className="text-xl md:text-2xl font-normal">
             {step === 1 ? "Join a small group of" : "Email"}&nbsp;
-            <span className="font-bold text-xl md:text-2xl">
+            <span className="font-medium text-xl md:text-2xl">
               {step === 1 ? "elite entrepreneurs" : "Verification"}
             </span>
             &nbsp;{step === 1 ? "today" : null}
@@ -110,16 +174,15 @@ const EmailModal = ({
         </div>
         <DialogFooter>
           <div className="w-full space-y-4 z-10">
-            <Button
+            <ShimmerButton
               type="submit"
-              variant="secondary"
               className="w-full items-center gap-2"
               onClick={step === 1 ? submitEmail : verifyEmail}
               disabled={pending}
             >
               {pending ? <Sun className="w-4 h-4 animate-spin" /> : null}
               {step === 1 ? "Get Started" : "Verify Email"}
-            </Button>
+            </ShimmerButton>
             <DialogClose className="w-full">
               <span className="bg-white text-center h-[38px] rounded-lg border flex items-center justify-center px-6 font-medium sm:cursor-pointer">
                 Close

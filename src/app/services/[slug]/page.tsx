@@ -1,38 +1,35 @@
-import Faq from "@/components/pages/home/faq";
-import CoreBenefits from "@/components/pages/services/core-benefits";
-import EndingFunnel from "@/components/pages/services/ending-funnel";
-import ServiceHeroSection from "@/components/pages/services/herosection";
-import LimitedOfferSection from "@/components/pages/services/limited-offer-section";
-import Testimonials from "@/components/pages/services/testimonials";
-import UserEmpathyBanner from "@/components/pages/services/user-empathy-banner";
-import WhatAndWhySection from "@/components/pages/services/what-and-why-section";
+import Faq from "@/app/_utils/faq";
+import { Action___Get__Review_By_Category } from "@/app/reviews/post/_utils/actions";
+import CoreBenefits from "@/app/services/_utils/core-benefits";
+import EndingFunnel from "@/app/services/_utils/ending-funnel";
+import ServiceHeroSection from "@/app/services/_utils/herosection";
+import LimitedOfferSection from "@/app/services/_utils/limited-offer-section";
+import Testimonials from "@/app/services/_utils/testimonials";
+import UserEmpathyBanner from "@/app/services/_utils/user-empathy-banner";
+import WhatAndWhySection from "@/app/services/_utils/what-and-why-section";
 import { ServicePageCOPY } from "@/lib/data/services";
 
-const Services = ({ params }: { params: { slug: string } }) => {
-  const {
-    googleAds,
-    webDevelopment,
-    softwareDevelopment,
-    wordpressDevelopment,
-    shopifyDevelopment,
-    uiux,
-    googleAnalytics,
-  } = ServicePageCOPY;
-  let data: any = googleAds;
-  if (params.slug.includes("google-ads")) {
-    data = googleAds;
-  } else if (params.slug.includes("google-analytics")) {
-    data = googleAnalytics;
-  } else if (params.slug.includes("custom-web-development")) {
-    data = webDevelopment;
-  } else if (params.slug.includes("software-development")) {
-    data = softwareDevelopment;
-  } else if (params.slug.includes("wordpress-development")) {
-    data = wordpressDevelopment;
-  } else if (params.slug.includes("shopify-development")) {
-    data = shopifyDevelopment;
-  } else if (params.slug.includes("uiux")) {
-    data = uiux;
+export type T__SlugType =
+  | "googleads"
+  | "googleanalytics"
+  | "customwebdev"
+  | "wordpress"
+  | "shopify"
+  | "uiux"
+  | "software"
+  | "socialmediapaidads";
+const Services = async ({ params }: { params: { slug: string } }) => {
+  let data: any = ServicePageCOPY.googleads;
+  const key = params?.slug
+    ?.replaceAll("development", "")
+    ?.replaceAll("-", "")
+    .trim();
+  const masteredKey = key === "customweb" ? "customwebdev" : key;
+  const result = await Action___Get__Review_By_Category(key as T__SlugType);
+  const reviews = result?.data?.length ? result?.data : [];
+
+  if (Object.keys(ServicePageCOPY).includes(masteredKey)) {
+    data = ServicePageCOPY[masteredKey as T__SlugType];
   }
 
   const {
@@ -51,7 +48,7 @@ const Services = ({ params }: { params: { slug: string } }) => {
       <LimitedOfferSection data={limitedOffer} />
       <WhatAndWhySection data={whyWeAndWhatWeDo} />
       <UserEmpathyBanner data={userEmpathy} />
-      <Testimonials />
+      {reviews?.length ? <Testimonials data={reviews} /> : null}
       <CoreBenefits data={coreBenefits} />
       <EndingFunnel data={endingFunnel} />
       <Faq data={faq} />

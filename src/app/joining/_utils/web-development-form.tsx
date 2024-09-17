@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,13 +14,16 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { WebDevelopmentFunnelForm, TWebDevelopmentFunnelForm } from "./types";
-import CustomSelect from "./custom-select";
+
 import CustomInput from "./custom-input";
 import CustomRadio from "./custom-radio";
 import { FunnelFormAction } from "./actions";
 import CountryCombobox from "@/components/ui/country-combobox";
 import { Sun } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { DL___FormData } from "./datalayer";
+import { useEffect } from "react";
+import Checkboxes from "@/components/molecule/checkboxes";
 
 function WebDevelopmentForm() {
   const router = useRouter();
@@ -28,34 +32,43 @@ function WebDevelopmentForm() {
   });
 
   async function onSubmit(data: TWebDevelopmentFunnelForm) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-
     if (typeof window !== "undefined") {
-      console.log("Running");
       const email = localStorage.getItem("user_email") || "dummy@mail.test";
       if (email) {
         const result = await FunnelFormAction({ ...data, email });
-        console.log(result);
+
         toast({
           variant: result?.success ? "default" : "destructive",
           title: "Joining to program",
           description: result?.message || "Thank you for your joining!",
         });
-        if (result.success) {
-          router.push("/joining/end?type=googleads");
+        if (typeof window !== "undefined") {
+          if (result.success) {
+            router.push("/joining/end?type=customwebdev");
+            DL___FormData(
+              form.getValues(),
+              "joiningWebFormSubmission",
+              "joining_web_form_submission"
+            );
+          } else {
+            DL___FormData(
+              form.getValues(),
+              "joiningWebFormAbandoned",
+              "joining_web_form_abandoned"
+            );
+          }
         }
       }
     }
   }
 
-  console.log(form.formState.errors);
+  useEffect(() => {
+    DL___FormData(
+      form.getValues(),
+      "joiningWebFormSubmissionProcessing",
+      "joining_web_form_submission_processing"
+    );
+  }, [form.getValues()]);
 
   return (
     <Form {...form}>
@@ -68,6 +81,7 @@ function WebDevelopmentForm() {
           resolve
         </h4>
         <CustomInput form={form} name="name" label="Name" />
+        <CustomInput form={form} name="websiteUrl" label="Website URL" />
         <FormField
           control={form.control}
           name="country"
@@ -76,7 +90,6 @@ function WebDevelopmentForm() {
               <FormLabel>Country</FormLabel>
               <CountryCombobox
                 onChange={(value: any) => {
-                  console.log(value);
                   form.setValue("country", value.target.value);
                 }}
               />
@@ -86,7 +99,7 @@ function WebDevelopmentForm() {
         />
 
         <CustomInput form={form} name="phone" label="Phone" />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="businessType"
           label="Which industry does your business thrive in?"
@@ -94,18 +107,21 @@ function WebDevelopmentForm() {
             {
               label: "Startup",
               value: "Startup",
+              checked: false,
             },
             {
               label: "Small Business Aiming for Growth",
               value: "Small Business Aiming for Growth",
+              checked: false,
             },
             {
               label: "Medium-Sized Business on the Path to Expansion",
               value: "Medium-Sized Business on the Path to Expansion",
+              checked: false,
             },
           ]}
         />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="industryType"
           label="What is your industry?"
@@ -113,25 +129,29 @@ function WebDevelopmentForm() {
             {
               label: "Ecommerce",
               value: "Ecommerce",
+              checked: false,
             },
             {
               label: "Educational Technologies",
               value: "Educational Technologies",
+              checked: false,
             },
             {
               label: "Financial Technologies",
               value: "Financial Technologies",
+              checked: false,
             },
             {
               label: "Software as a Service",
               value: "Software as a Service",
+              checked: false,
             },
           ]}
         />
-        {form.watch("industryType") === "Others" ? (
+        {form.watch("industryType")?.includes("Others") ? (
           <CustomInput form={form} name="customIndustry" label="Add your own" />
         ) : null}
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="goals"
           label="What are your core goals for development? (Select your primary focus)"
@@ -139,23 +159,27 @@ function WebDevelopmentForm() {
             {
               label: "Boosting Brand Visiblity",
               value: "Boosting Brand Visiblity",
+              checked: false,
             },
             {
               label: "Lead generation",
               value: "Lead generation",
+              checked: false,
             },
             {
               label: "Driving Sales Conversions",
               value: "Driving Sales Conversions",
+              checked: false,
             },
             {
               label: "Others",
               value: "Others",
+              checked: false,
             },
           ]}
         />
 
-        {form.watch("goals") === "Others" ? (
+        {form.watch("goals")?.includes("Others") ? (
           <CustomInput
             form={form}
             name="customGoals"
@@ -204,7 +228,7 @@ function WebDevelopmentForm() {
           name="painpoints"
           label="What are your biggest challenges with attracting customers? (Any pain points)"
         />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="commitment"
           label="How ready can you fully engage with our intensive web development program?"
@@ -212,14 +236,17 @@ function WebDevelopmentForm() {
             {
               label: "Fully commited",
               value: "Fully commited",
+              checked: false,
             },
             {
               label: "Seeking more information",
               value: "Seeking more information",
+              checked: false,
             },
             {
               label: "Considering future commitments",
               value: "Considering future commitments",
+              checked: false,
             },
           ]}
         />

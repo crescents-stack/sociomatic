@@ -31,13 +31,19 @@ const CustomInput = ({
               onChange={(e: any) => {
                 form.setValue(
                   name,
-                  type === "number" ? parseInt(e.target.value) : e.target.value
+                  type === "number"
+                    ? parseFloat(e.target.value)
+                    : e.target.value
                 );
               }}
               defaultValue={field.value}
             />
           ) : (
-            <Textarea onChange={field.onChange} value={field.value} rows={3} />
+            <Textarea
+              onChange={field.onChange}
+              value={field.value}
+              className="min-h-[240px]"
+            />
           )}
           <FormMessage />
         </FormItem>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,13 +14,16 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { WebDevelopmentFunnelForm, TWebDevelopmentFunnelForm } from "./types";
-import CustomSelect from "./custom-select";
+
 import CustomInput from "./custom-input";
 import CustomRadio from "./custom-radio";
 import { FunnelFormAction } from "./actions";
 import CountryCombobox from "@/components/ui/country-combobox";
 import { Sun } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { DL___FormData } from "./datalayer";
+import { useEffect } from "react";
+import Checkboxes from "@/components/molecule/checkboxes";
 
 function UiUxForm() {
   const router = useRouter();
@@ -28,34 +32,43 @@ function UiUxForm() {
   });
 
   async function onSubmit(data: TWebDevelopmentFunnelForm) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-
     if (typeof window !== "undefined") {
-      console.log("Running");
       const email = localStorage.getItem("user_email") || "dummy@mail.test";
       if (email) {
         const result = await FunnelFormAction({ ...data, email });
-        console.log(result);
+
         toast({
           variant: result?.success ? "default" : "destructive",
           title: "Joining to program",
           description: result?.message || "Thank you for your joining!",
         });
-        if (result.success) {
-          router.push("/joining/end?type=googleads");
+        if (typeof window !== "undefined") {
+          if (result.success) {
+            router.push("/joining/end?type=uiux");
+            DL___FormData(
+              form.getValues(),
+              "joiningUiUxFormSubmission",
+              "joining_uiux_form_submission"
+            );
+          } else {
+            DL___FormData(
+              form.getValues(),
+              "joiningUiUxFormAbandoned",
+              "joining_uiux_form_abandoned"
+            );
+          }
         }
       }
     }
   }
 
-  console.log(form.formState.errors);
+  useEffect(() => {
+    DL___FormData(
+      form.getValues(),
+      "joiningUiUxFormProcessing",
+      "joining_ui_ux_form_processing"
+    );
+  }, [form.getValues()]);
 
   return (
     <Form {...form}>
@@ -76,7 +89,6 @@ function UiUxForm() {
               <FormLabel>Country</FormLabel>
               <CountryCombobox
                 onChange={(value: any) => {
-                  console.log(value);
                   form.setValue("country", value.target.value);
                 }}
               />
@@ -86,7 +98,7 @@ function UiUxForm() {
         />
 
         <CustomInput form={form} name="phone" label="Phone" />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="businessType"
           label="Which industry does your business thrive in?"
@@ -94,18 +106,21 @@ function UiUxForm() {
             {
               label: "Startup",
               value: "Startup",
+              checked: false,
             },
             {
               label: "Growing Small Business",
               value: "Growing Small Business",
+              checked: false,
             },
             {
               label: "Expanding Medium-Sized Enterprise",
               value: "Expanding Medium-Sized Enterprise",
-            }
+              checked: false,
+            },
           ]}
         />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="industryType"
           label="What is your industry?"
@@ -113,29 +128,34 @@ function UiUxForm() {
             {
               label: "ECommerce",
               value: "ECommerce",
+              checked: false,
             },
             {
               label: "Educational Technology",
               value: "Educational Technology",
+              checked: false,
             },
             {
               label: "Financial Technology",
               value: "Financial Technology",
+              checked: false,
             },
             {
               label: "Software as a Service",
               value: "Software as a Service",
+              checked: false,
             },
             {
               label: "Others",
               value: "Others",
+              checked: false,
             },
           ]}
         />
-        {form.watch("industryType") === "Others" ? (
+        {form.watch("industryType")?.includes("Others") ? (
           <CustomInput form={form} name="customIndustry" label="Add your own" />
         ) : null}
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="goals"
           label="What objectives do you aim to achieve with UI/UX design? (Select all that apply)"
@@ -143,23 +163,27 @@ function UiUxForm() {
             {
               label: "Boost User Engagement",
               value: "Boost User Engagement",
+              checked: false,
             },
             {
               label: "Increase Accessibility",
               value: "Increase Accessibility",
+              checked: false,
             },
             {
               label: "Simplify User Navigation",
               value: "Simplify User Navigation",
+              checked: false,
             },
             {
               label: "Others",
               value: "Others",
+              checked: false,
             },
           ]}
         />
 
-        {form.watch("goals") === "Others" ? (
+        {form.watch("goals")?.includes("Others") ? (
           <CustomInput
             form={form}
             name="customGoals"
@@ -208,7 +232,7 @@ function UiUxForm() {
           name="painpoints"
           label="What are your biggest challenges with attracting customers? (Any pain points)"
         />
-        <CustomSelect
+        <Checkboxes
           form={form}
           name="commitment"
           label="Given the program's demands and time investment, how ready are you to embark on this UI/UX design journey?"
@@ -216,14 +240,17 @@ function UiUxForm() {
             {
               label: "Fully Committed",
               value: "Fully Committed",
+              checked: false,
             },
             {
               label: "Seeking Further Information",
               value: "Seeking Further Information",
+              checked: false,
             },
             {
               label: "Considering Future Engagement",
               value: "Considering Future Engagement",
+              checked: false,
             },
           ]}
         />

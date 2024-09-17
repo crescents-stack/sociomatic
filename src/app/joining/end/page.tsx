@@ -1,32 +1,118 @@
-import CoreBenefits from "@/components/pages/services/core-benefits";
+import CoreBenefits from "@/app/services/_utils/core-benefits";
 import Confetti from "../_utils/confetti";
+import MeetOurCEO from "@/app/about-us/_utils/meet-our-ceo";
+import { E_FormTypes } from "../_utils/types";
 
-const Page = () => {
+const Page = ({ searchParams }: { searchParams: { type: E_FormTypes } }) => {
+  let data = PageData.googleads;
+  if (searchParams.type && Object.keys(PageData)?.includes(searchParams.type)) {
+    // @ts-ignore
+    data = PageData[searchParams.type];
+  }
+
+  const { title } = data;
   return (
-    <div className="container section flex flex-col items-center justify-center gap-8">
-      <div className="px-8 py-4 rounded-md bg-secondary text-white font-bold inline-block mx-auto text-2xl md:text-3xl lg:text-4xl">
-        Congratulations!
-      </div>
-      <div className="max-w-[800px] mx-auto space-y-8">
-        <h2 className="text-gray-400 text-center">
-          You have <span className="text-primary">successfully joined</span> to
-          our program.&nbsp;<span>We will be back to you soon!</span>
-        </h2>
-        <p className="text-center leading-loose text-gray-600">
-          Pariatur qui et do excepteur voluptate eiusmod excepteur aute.
-          Occaecat aliquip quis minim officia mollit commodo et adipisicing ea.
-          Ut incididunt laborum velit eu commodo labore cupidatat laborum esse.
-          Elit velit consequat amet pariatur dolore nisi esse nostrud mollit
-          culpa. Est ut qui enim quis non cillum ipsum commodo reprehenderit
-          mollit.
-        </p>
+    <div className="flex flex-col gap-8 pb-20">
+      <div className="container pt-32">
+        <div className="text-secondary font-bold inline-block text-2xl md:text-3xl lg:text-4xl pb-8">
+          Congratulations!
+        </div>
+        <div className="max-w-[800px] space-y-8">
+          <h2 className="text-gray-400 [&>span]:text-primary [&>span]:mx-3">
+            {title}
+          </h2>
+        </div>
       </div>
       <Confetti />
+      <MeetOurCEO />
       <CoreBenefits data={CoreBenefitsData} />
     </div>
   );
 };
 export default Page;
+
+const PageData = {
+  googleads: {
+    id: 1,
+    title: (
+      <>
+        Hey there! First off, a huge
+        <span>congratulations on considering Sociomatic</span>
+        for your Google Ads Management Needs
+      </>
+    ),
+  },
+  googleanalytics: {
+    id: 2,
+    title: (
+      <>
+        Hey there! First off, a huge
+        <span>congratulations on considering Sociomatic</span>
+        for your Google Analytics Management Needs
+      </>
+    ),
+  },
+  socialmediapaidads: {
+    id: 3,
+    title: (
+      <>
+        Hey there! First off, a huge
+        <span>congratulations on considering Sociomatic</span>
+        for your Social Media Paid Ads Management Needs
+      </>
+    ),
+  },
+  uiux: {
+    id: 4,
+    title: (
+      <>
+        Hey there! First off, a huge
+        <span>congratulations on considering Sociomatic</span>
+        for your UI/UX and Graphic Design Needs
+      </>
+    ),
+  },
+  customwebdev: {
+    id: 5,
+    title: (
+      <>
+        Hey there! First off, a huge
+        <span>congratulations on considering Sociomatic</span>
+        for your Custom Web Development Needs
+      </>
+    ),
+  },
+  software: {
+    id: 6,
+    title: (
+      <>
+        Hey there! First off, a huge
+        <span>congratulations on considering Sociomatic</span>
+        for your Software Development Needs
+      </>
+    ),
+  },
+  wordpress: {
+    id: 7,
+    title: (
+      <>
+        Hey there! First off, a huge
+        <span>congratulations on considering Sociomatic</span>
+        for your Wordpress Development Needs
+      </>
+    ),
+  },
+  shopify: {
+    id: 8,
+    title: (
+      <>
+        Hey there! First off, a huge
+        <span>congratulations on considering Sociomatic</span>
+        for your Shopify Development Needs
+      </>
+    ),
+  },
+};
 
 const CoreBenefitsData = {
   tagline: <>Innovation meets excellence</>,

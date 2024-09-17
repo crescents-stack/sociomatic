@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const ServicePageCOPY = {
-  googleAds: {
+  googleads: {
     hero: {
       tagline: <>100% Trust Worthy Solutions</>,
       title: (
@@ -36,7 +36,8 @@ export const ServicePageCOPY = {
       tagline: <></>,
       title: (
         <>
-          <span>Hurry up!</span> to Supercharge
+          <span style={{ paddingLeft: "0!important" }}>Hurry up!</span> to
+          Supercharge
           <span>Your Growth with Google Ads!</span>
         </>
       ),
@@ -86,7 +87,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=googleads",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -117,108 +118,71 @@ export const ServicePageCOPY = {
           {
             id: 1,
             icon: <></>,
-            title: <>Real-time update</>,
+            title: <>Unmatched Expertise</>,
             paragraph: (
               <>
-                Sync your calendar and track your meeting expenses. Mercury will
-                read this and categorize your expense against your budget in
-                seconds.
+                Our Google Ads-certified team is constantly up-to-date on the
+                latest strategies and best practices.
               </>
             ),
           },
           {
             id: 2,
             icon: <></>,
-            title: <>Testing feedback</>,
+            title: <>Results-Obsessed</>,
             paragraph: (
               <>
-                We prioritize responsive design principles, ensuring that your
-                website functions flawlessly and looks great on all devices,
-                from desktops to mobile phones
+                We don&apos;t just manage ads; we drive results. Your success is
+                our top priority.
               </>
             ),
           },
           {
             id: 3,
             icon: <></>,
-            title: <>Advanced Functionality</>,
+            title: <>Transparent Communication</>,
             paragraph: (
               <>
-                Sociomatic websites are equipped with advanced features and
-                functionalities that enhance user experience and streamline
-                business processes
+                We believe in clear and ongoing communication, keeping you
+                informed every step of the way.
               </>
             ),
           },
           {
             id: 4,
             icon: <></>,
-            title: <>Scalability</>,
+            title: <>Custom Tailored Solutions</>,
             paragraph: (
               <>
-                Our websites are built with scalability in mind, allowing them
-                to grow and adapt to your business&apos;s evolving needs and
-                requirements over time
+                We don&apos;t believe in a one-size-fits-all approach. We get to
+                know your business and create a Google Ads strategy that aligns
+                perfectly with your goals.
               </>
             ),
           },
           {
             id: 5,
             icon: <></>,
-            title: <>Robust Security</>,
+            title: <>Technology & Automation</>,
             paragraph: (
               <>
-                Security is paramount in today&apos;s digital landscape. We
-                implement robust security measures to protect your website and
-                data from potential threats and vulnerabilities
+                We use advanced technology to manage campaigns, optimize bids,
+                and target ads effectively. This helps us focus on strategy and
+                deliver better results for your business.
               </>
             ),
           },
           {
             id: 6,
             icon: <></>,
-            title: <>Optimized Performance</>,
+            title: <>Long-Term Partnership</>,
             paragraph: (
               <>
-                We optimize website performance to ensure fast loading times,
-                smooth navigation, and an overall seamless user experience that
-                keeps visitors engaged
-              </>
-            ),
-          },
-          {
-            id: 7,
-            icon: <></>,
-            title: <>Cutting Edge Techs</>,
-            paragraph: (
-              <>
-                We leverage the latest technologies, such as NextJS, NodeJS, and
-                ExpressJS, to build modern, high-performance websites that meet
-                the demands of today&apos;s digital landscape
-              </>
-            ),
-          },
-          {
-            id: 8,
-            icon: <></>,
-            title: <>Cloud Hosting</>,
-            paragraph: (
-              <>
-                Sociomatic utilizes AWS(Amazon Web Services), Vercel, and
-                VPS(Virtual Private Server) setup to provide reliable, scalable
-                hosting solutions that become accessible anytime
-              </>
-            ),
-          },
-          {
-            id: 9,
-            icon: <></>,
-            title: <>Advanced DBMS</>,
-            paragraph: (
-              <>
-                Our expertise in Database Technologies, including SQL(Postgres,
-                SQLite) and NoSQL(MongoDB, DynamoDB), allows us to design
-                efficient data storage solutions.
+                We understand that Google Ads success isn&apos;t a one-time
+                thing. We&apos;re committed to building a long-term partnership
+                with you, continuously refining your campaigns, and adapting to
+                market changes to ensure sustainable growth and maximize your
+                return on investment (ROI) over time.
               </>
             ),
           },
@@ -330,7 +294,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=googleads",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -401,20 +365,25 @@ export const ServicePageCOPY = {
       ],
     },
   },
-  webDevelopment: {
+  customwebdev: {
     hero: {
       tagline: <>End-to-End Web Solutions</>,
       title: (
-        <>End to End Custom Web Development That Delivery Outstanding Product</>
+        <>
+          End to End Custom Web Development That
+          <span>Delivery Outstanding Product</span>
+        </>
       ),
       body: (
         <>
           We are crafting unique websites for your specific needs. Sociomatic
           provides custom website and web application development services that
-          help businesses differentiate themselves online. From modern landing
-          pages to sophisticated web applications, our team delivers
-          personalized solutions that reflect your brand identity and engage
-          your audience.
+          help businesses differentiate themselves online.
+          <span>
+            From modern landing pages to sophisticated web applications, our
+            team delivers personalized solutions that reflect your brand
+            identity and engage your audience.
+          </span>
         </>
       ),
       cta: {
@@ -430,14 +399,20 @@ export const ServicePageCOPY = {
     },
     limitedOffer: {
       tagline: <>Exclusive Opportunity for Rapid Business Growth</>,
-      title: <>Accelerate! Your Success in 2024</>,
+      title: (
+        <>
+          <span>Accelerate!</span> Your Success in 2024
+        </>
+      ),
       body: {
         para: (
           <>
             Don&apos;t miss the chance to propel your business forward in 2024.
             Sociomatic offers special deals on custom web development services
-            to expedite your digital ambitions. Contact us now to unlock the
-            full potential of your business!
+            to expedite your digital ambitions.
+            <span>
+              Contact us now to unlock the full potential of your business!
+            </span>
           </>
         ),
         benefits: [],
@@ -445,7 +420,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=customwebdev",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -461,9 +436,11 @@ export const ServicePageCOPY = {
           <>
             At Sociomatic, we&apos;re committed to empowering your digital
             journey through innovative web solutions. Our dedicated team works
-            collaboratively with clients to understand their objectives and
-            deliver custom websites that look great and perform seamlessly
-            across all devices.
+            collaboratively with clients to understand
+            <span>
+              your objectives and deliver custom websites that look great and
+              perform seamlessly across all devices.
+            </span>
           </>
         ),
         benefits: [
@@ -592,14 +569,20 @@ export const ServicePageCOPY = {
     },
     coreBenefits: {
       tagline: <>Innovation meets excellence</>,
-      title: <>Crafting Solutions, Fostering Relationships</>,
+      title: (
+        <>
+          <span>Crafting Solutions</span>, Fostering Relationships
+        </>
+      ),
       body: {
         para: (
           <>
             Our commitment to excellence sets us apart in the realm of web
-            development. We ensure your online success with personalized
-            solutions, optimized performance, scalability, and dedicated
-            support.
+            development.
+            <span>
+              We ensure your online success with personalized solutions,
+              optimized performance, scalability, and dedicated support.
+            </span>
           </>
         ),
         benefits: [
@@ -651,7 +634,7 @@ export const ServicePageCOPY = {
       title: (
         <>
           Partner with Us for Exceptional Web Solutions. We deliver exceptional
-          results, guaranteed!
+          results, <span>guaranteed!</span>
         </>
       ),
       body: (
@@ -664,7 +647,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=customwebdev",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -735,12 +718,12 @@ export const ServicePageCOPY = {
       ],
     },
   },
-  softwareDevelopment: {
+  software: {
     hero: {
       tagline: <>Unlock Potential with Software Solutions</>,
       title: (
         <>
-          Transforming Ideas into <span>Robust</span> Software
+          <span>Transforming Ideas</span> into Robust Software
         </>
       ),
       body: (
@@ -784,7 +767,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=software",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -911,8 +894,8 @@ export const ServicePageCOPY = {
               <>
                 Our expertise in database technologies such as SQL NoSQL enables
                 us to design efficient data storage solutions that support your
-                software’s functionalities and scalability while ensuring data
-                integrity and security.
+                software&apos;s functionalities and scalability while ensuring
+                data integrity and security.
               </>
             ),
           },
@@ -1007,7 +990,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=software",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -1084,7 +1067,7 @@ export const ServicePageCOPY = {
       ],
     },
   },
-  wordpressDevelopment: {
+  wordpress: {
     hero: {
       tagline: <>End-to-end WordPress solutions</>,
       title: (
@@ -1109,7 +1092,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/joining?type=software",
+          link: "/joining?type=wordpress",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -1139,7 +1122,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=wordpress",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -1321,7 +1304,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=wordpress",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -1389,10 +1372,16 @@ export const ServicePageCOPY = {
       ],
     },
   },
-  shopifyDevelopment: {
+  shopify: {
     hero: {
       tagline: <>End-to-end Shopify solutions</>,
-      title: <>Tailored Shopify Solutions for Your Online Store Success</>,
+      title: (
+        <>
+          Tailored Shopify Solutions for
+          <br />
+          <span>Your</span> Online Store <span>Success</span>
+        </>
+      ),
       body: (
         <>
           Sociomatic offers expert Shopify development services to help
@@ -1433,7 +1422,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=shopify",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -1604,13 +1593,14 @@ export const ServicePageCOPY = {
         <>
           Ready to boost your online sales with Shopify? Let our dedicated team
           craft a scalable and user-friendly e-commerce solution for your
-          business. Contact us today, and let’s turn your store into a success.
+          business. Contact us today, and let&apos;s turn your store into a
+          success.
         </>
       ),
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=shopify",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -1690,7 +1680,11 @@ export const ServicePageCOPY = {
   uiux: {
     hero: {
       tagline: <>Modern UI/UX solutions</>,
-      title: <>Crafting Reflexive Interfaces for Seamless Interactions </>,
+      title: (
+        <>
+          Crafting <span>Reflexive Interfaces</span> for Seamless Interactions
+        </>
+      ),
       body: (
         <>
           Sociomatic specializes in UI/UX services to create engaging,
@@ -1732,7 +1726,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=uiux",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -1909,7 +1903,7 @@ export const ServicePageCOPY = {
       title: (
         <>
           Partner with Us for Engaging User Experiences,Our commitment is
-          <span>determined</span>
+          determined
         </>
       ),
       body: (
@@ -1925,7 +1919,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=uiux",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -2000,13 +1994,13 @@ export const ServicePageCOPY = {
       ],
     },
   },
-  googleAnalytics: {
+  googleanalytics: {
     hero: {
       tagline: <>Get Trust in Your Arsenal</>,
       title: (
         <>
-          Unlock User Insights & Retention: The Power of GA4 & Google Tag
-          Manager
+          Unlock User <span>Insights & Retention</span>: The Power of GA4 &
+          Google Tag Manager
         </>
       ),
       body: (
@@ -2048,7 +2042,7 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
-          link: "/",
+          link: "/joining?type=googleanalytics",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
@@ -2228,7 +2222,370 @@ export const ServicePageCOPY = {
       cta: {
         primary: {
           text: <>Get Started Right Away</>,
+          link: "/joining?type=googleanalytics",
+        },
+        secondary: {
+          text: <>Get A Free Consultation</>,
           link: "/",
+        },
+      },
+    },
+    faq: {
+      title: <>Frequently Asked Questions</>,
+      para: (
+        <>
+          Are you confused by GA4, GTM, Looker Studio, and Google Ads Tracking?
+          We&apos;ve Got You Covered!
+        </>
+      ),
+      faqs: [
+        {
+          id: 1,
+          question: <>What&apos;s GA4?</>,
+          answer: (
+            <>
+              Google Analytics 4, the latest website and app analytics platform,
+              tracks user journeys across platforms and provides future-proof
+              data.
+            </>
+          ),
+          tip: (
+            <>
+              We&apos;ll help you set up GA4 and ensure you capture the data
+              that matters most.
+            </>
+          ),
+        },
+        {
+          id: 2,
+          question: <>Why use Google Tag Manager (GTM)?</>,
+          answer: (
+            <>
+              GTM simplifies managing all your marketing tags (GA4, Google Ads,
+              etc.) in one place. Update tags easily and improve website
+              performance by reducing code bloat.
+            </>
+          ),
+          tip: (
+            <>
+              Our experts will configure GTM for seamless tag management, saving
+              you time and resources
+            </>
+          ),
+        },
+        {
+          id: 3,
+          question: <>What&apos;s Looker Studio good for?</>,
+          answer: (
+            <>
+              It transforms raw data from GA4 and other sources into beautiful,
+              informative dashboards and reports. Share insights and collaborate
+              with your team to make data-driven decisions.
+            </>
+          ),
+          tip: (
+            <>
+              We&apos;ll help you build engaging Looker Studio reports that
+              unlock valuable insights from your data.
+            </>
+          ),
+        },
+        {
+          id: 4,
+          question: <>How does Google Ads conversion tracking help?</>,
+          answer: (
+            <>
+              It measures if your ads lead to valuable actions like purchases or
+              signups. Optimize your campaigns for higher conversions and track
+              your return on investment (ROI).
+            </>
+          ),
+          tip: (
+            <>
+              We&apos;ll guide you through setting up conversion tracking and
+              analyzing data to optimize your Google Ads campaigns for maximum
+              impact.
+            </>
+          ),
+        },
+      ],
+    },
+  },
+  socialmediapaidads: {
+    hero: {
+      tagline: <>Get Trust in Your Arsenal</>,
+      title: (
+        <>
+          2024 is <span>Your Year to Explode Growth</span>: Will Your Business
+          Be Left Behind? (47 Spots Available)
+        </>
+      ),
+      body: (
+        <>
+          Description: A handful of business owners are about to unlock
+          explosive growth in 2024... Are you ready to join them? At The
+          Sociomatic,
+          <span>
+            we&apos;re on a mission to empower Fifty businesses this year
+          </span>
+          with game-changing Social Media Paid Ads strategies. Take your chance
+          to be one of them.
+          <span>Get a FREE Meta/linkedin Ads audit today</span> and see how we
+          can transform your business!
+        </>
+      ),
+      cta: {
+        primary: {
+          text: <>Get Started Right Away</>,
+          link: "/joining?type=socialmediapaidads",
+        },
+        secondary: {
+          text: <>Get A Free Consultation</>,
+          link: "/",
+        },
+      },
+    },
+    limitedOffer: {
+      tagline: <></>,
+      title: (
+        <>
+          Get <span>your social media advertising rolling</span> with these
+          incredible offers for a limited time only!
+        </>
+      ),
+      body: {
+        para: (
+          <>
+            <span>Here&apos;s what you&apos;ll get:</span>
+          </>
+        ),
+        benefits: [
+          {
+            id: 1,
+            title: <>20% off your first social media ad campaign</>,
+            paragraph: (
+              <>
+                We&apos;ll happily apply the discount when you discuss your
+                campaign with us. But hurry, this offer will only last for a
+                while!
+              </>
+            ),
+          },
+          {
+            id: 2,
+            title: <>Free ad copy review</>,
+            paragraph: (
+              <>
+                Want to know if your website is converting? Let our experts take
+                a look! Just mention this article when you contact us.
+              </>
+            ),
+          },
+          {
+            id: 3,
+            title: <>Free Pixel Installation</>,
+            paragraph: (
+              <>
+                Boost your ad tracking and optimize your campaigns for maximum
+                results with a free Facebook pixel setup!
+              </>
+            ),
+          },
+        ],
+      },
+      cta: {
+        primary: {
+          text: <>Get Started Right Away</>,
+          link: "/joining?type=socialmediapaidads",
+        },
+        secondary: {
+          text: <>Get A Free Consultation</>,
+          link: "/",
+        },
+      },
+    },
+    whyWeAndWhatWeDo: {
+      tagline: <>Designing Experiences, Inspiring Engagement</>,
+      title: <>Why We&apos;re Your Social Media Ad Guru</>,
+      body: {
+        para: (
+          <>
+            You&apos;re a busy entrepreneur or marketer. You wear many hats, and
+            social media advertising might feel like just one more thing on your
+            already overflowing plate. That&apos;s where The Sociomatic comes
+            in. We take the reins on your social media ad campaigns, allowing
+            you to focus on what you do best - running your business.
+            Here&apos;s why we&apos;re the perfect partner for all your paid
+            social media advertising like facebook/instagram/Linkedin needs
+          </>
+        ),
+        benefits: [
+          {
+            id: 1,
+            icon: <></>,
+            title: <>Targeted Precision</>,
+            paragraph: (
+              <>
+                We leverage in-depth audience research and powerful targeting
+                tools to pinpoint your target audience with laser focus,
+                ensuring every ad reaches the right eye at the right time
+              </>
+            ),
+          },
+          {
+            id: 2,
+            icon: <></>,
+            title: <>Creative Powerhouse</>,
+            paragraph: (
+              <>
+                Our team of talented copywriters and graphic designers crafts
+                compelling visuals and ad copy that stop the scroll, spark
+                engagement, and resonate with your target audience on a deeper
+                level
+              </>
+            ),
+          },
+          {
+            id: 3,
+            icon: <></>,
+            title: <>Data-Driven Decisions</>,
+            paragraph: (
+              <>
+                We don&apos;t just throw ads against the wall and hope for the
+                best. We meticulously track campaign performance across key
+                metrics, analyze the data to identify what&apos;s working and
+                what&apos;s not, and use those insights to optimize your
+                campaigns for maximum results.
+              </>
+            ),
+          },
+          {
+            id: 4,
+            icon: <></>,
+            title: <>Measurable Success</>,
+            paragraph: (
+              <>
+                Forget vanity metrics. We provide clear, actionable insights
+                that track the effectiveness of your ads and demonstrate the
+                return on investment (ROI) you&apos;re generating from your
+                social media advertising spend
+              </>
+            ),
+          },
+          {
+            id: 5,
+            icon: <></>,
+            title: <>Budget-Conscious Experts</>,
+            paragraph: (
+              <>
+                We understand that marketing budgets are tight. That&apos;s why
+                we work closely with you to develop cost-effective strategies
+                that stretch your marketing dollars further and deliver the
+                biggest bang for your buck
+              </>
+            ),
+          },
+          {
+            id: 6,
+            icon: <></>,
+            title: <>Always in Your Corner</>,
+            paragraph: (
+              <>
+                We&apos;re here to support you throughout your ad journey. Our
+                team can answer your questions and help you navigate social
+                media advertising.
+              </>
+            ),
+          },
+        ],
+      },
+    },
+    userEmpathy: {
+      tagline: <>Empathetic Support Always</>,
+      title: <>We&apos;ve Been There. Let Us Help You Get There Faster.</>,
+      body: (
+        <>
+          We understand the challenges of navigating the ever-evolving world of
+          social media advertising. But you don&apos;t have to go alone to it.
+          Our expert team will guide you every step of the way, turning your
+          social media presence into a powerful lead-generation machine.
+        </>
+      ),
+    },
+    coreBenefits: {
+      tagline: <>Inspiring Engagement</>,
+      title: <>Unlock the Power of User Insights</>,
+      body: {
+        para: (
+          <>
+            Go beyond basic website analytics and gain a complete understanding
+            of how users interact with your website. Track user journeys,
+            identify pain points, and discover hidden opportunities to optimize
+            your marketing funnel
+          </>
+        ),
+        benefits: [
+          {
+            id: 1,
+            title: <>Generate Qualified Leads</>,
+            para: (
+              <>
+                Attract customers actively interested in your offer and ready to
+                convert.
+              </>
+            ),
+          },
+          {
+            id: 2,
+            title: <>Skyrocketing Sales</>,
+            para: (
+              <>
+                Convert casual scrollers into paying customers with targeted,
+                high-converting ad campaigns.
+              </>
+            ),
+          },
+          {
+            id: 3,
+            title: <>Drive Targeted Traffic</>,
+            para: (
+              <>
+                Send high-quality traffic to your website or landing page,
+                skyrocketing conversions.
+              </>
+            ),
+          },
+          {
+            id: 4,
+            title: <>Valuable Data & Insights</>,
+            para: (
+              <>
+                Gain valuable customer insights to refine your marketing
+                strategy and stay ahead of the curve.
+              </>
+            ),
+          },
+        ],
+      },
+    },
+    endingFunnel: {
+      tagline: <>Unleash the Potential of Your Website with GA4 & GTM!</>,
+      title: (
+        <>
+          Don&apos;t Wait. Get Started Today & Watch Your Business Take Flight!
+        </>
+      ),
+      body: (
+        <>
+          Don&apos;t wait any longer. Get started today, and let&apos;s discuss
+          your social media goals. Together, we&apos;ll craft a winning ad
+          campaign that propels your brand to new heights.
+        </>
+      ),
+      cta: {
+        primary: {
+          text: <>Get Started Right Away</>,
+          link: "/joining?type=socialmediapaidads",
         },
         secondary: {
           text: <>Get A Free Consultation</>,
